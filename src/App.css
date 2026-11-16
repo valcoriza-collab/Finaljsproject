@@ -1,239 +1,96 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
-  background-color: #0f172a;
-  color: #f8fafc;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
 }
 
-.app-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Navigation Bar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1e293b;
-  padding: 14px 32px;
-  border-bottom: 2px solid #38bdf8;
+  background-color: #333;
+  color: white;
+  padding: 12px 20px;
 }
 
-.nav-logo {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #38bdf8;
-}
-
-.nav-menu {
-  list-style: none;
-  display: flex;
-  gap: 12px;
-}
-
-.nav-link {
-  background: transparent;
-  border: none;
-  color: #cbd5e1;
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 6px;
+.navbar button {
+  background: none;
+  border: 1px solid #777;
+  color: white;
+  padding: 6px 12px;
+  margin-left: 8px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.nav-link:hover {
-  background-color: #334155;
-  color: #ffffff;
+.navbar button.active {
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
-.nav-link.active {
-  background-color: #0284c7;
-  color: #ffffff;
+.box {
+  max-width: 400px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  text-align: center;
 }
 
-/* Main Content */
-.content {
-  flex: 1;
+.buttons {
+  margin: 15px 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 24px 16px;
-}
-
-.sudoku-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.sudoku-section h1 {
-  margin-bottom: 14px;
-  font-size: 1.8rem;
-  color: #f8fafc;
-}
-
-/* Mode & Difficulty Controls */
-.mode-controls {
-  display: flex;
   gap: 10px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
-.difficulty-select {
-  background-color: #1e293b;
-  color: #f8fafc;
-  border: 1px solid #38bdf8;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-weight: 600;
+.buttons button, .rules button {
+  padding: 8px 14px;
   cursor: pointer;
+  border: 1px solid #999;
+  background-color: #eee;
 }
 
-/* 9x9 Sudoku Grid */
-.sudoku-grid {
-  border: 3px solid #38bdf8;
-  background-color: #1e293b;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+.grid {
+  display: inline-block;
+  border: 2px solid black;
 }
 
-.sudoku-row {
+.row {
   display: flex;
 }
 
 .cell {
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   text-align: center;
-  font-size: 1.25rem;
-  font-weight: 700;
-  border: 1px solid #475569;
-  outline: none;
-  transition: background-color 0.15s;
+  font-size: 18px;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
 }
 
-.border-right-thick {
-  border-right: 3px solid #38bdf8;
+.right-line {
+  border-right: 2px solid black;
 }
 
-.border-bottom-thick {
-  border-bottom: 3px solid #38bdf8;
+.bottom-line {
+  border-bottom: 2px solid black;
 }
 
-.cell-fixed {
-  background-color: #1e293b;
-  color: #38bdf8;
-  cursor: default;
+.fixed {
+  background-color: #e9ecef;
+  font-weight: bold;
 }
 
-.cell-editable {
-  background-color: #0f172a;
-  color: #ffffff;
+.wrong {
+  background-color: #ffcccc;
+  color: red;
 }
 
-.cell-editable:focus {
-  background-color: #1d4ed8;
+.msg {
+  font-weight: bold;
+  margin-top: 12px;
 }
 
-.cell-error {
-  background-color: #dc2626 !important;
-  color: #ffffff !important;
-}
-
-/* Buttons & Status */
-.status-msg {
-  margin-top: 14px;
-  padding: 10px 16px;
-  border-radius: 6px;
-  background-color: #1e293b;
-  border: 1px solid #38bdf8;
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.btn {
-  padding: 9px 18px;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: 0.2s;
-}
-
-.btn-primary,
-.btn-active {
-  background-color: #0284c7;
-  color: #ffffff;
-}
-
-.btn-primary:hover,
-.btn-active:hover {
-  background-color: #0369a1;
-}
-
-.btn-outline {
-  background-color: #1e293b;
-  color: #cbd5e1;
-  border: 1px solid #475569;
-}
-
-.btn-outline:hover {
-  border-color: #38bdf8;
-  color: #ffffff;
-}
-
-.btn-secondary {
-  background-color: #334155;
-  color: #f8fafc;
-}
-
-.btn-secondary:hover {
-  background-color: #475569;
-}
-
-/* Info / Rules Card */
-.info-card {
-  background-color: #1e293b;
-  border: 1px solid #38bdf8;
-  border-radius: 10px;
-  padding: 28px;
-  max-width: 480px;
-  width: 100%;
-}
-
-.info-card h2 {
-  color: #38bdf8;
-  margin-bottom: 16px;
-}
-
-.info-card ul {
-  margin-left: 20px;
-  margin-bottom: 20px;
-  line-height: 1.7;
-  color: #e2e8f0;
-}
-
-.info-card p {
-  line-height: 1.6;
-  color: #e2e8f0;
-  margin-bottom: 20px;
+.rules {
+  text-align: left;
 }
